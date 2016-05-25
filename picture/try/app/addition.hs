@@ -4,6 +4,8 @@ module Main where
 import Graphics.X11.Turtle
 import Text.XML.YJSVG hiding (topleft)
 
+import Lib
+
 main :: IO ()
 main = do
 	f <- openField
@@ -28,17 +30,3 @@ main = do
 	svg <- getSVG t
 	putStr $ showSVG 830 300 svg
 	waitField f
-
-put :: ColorClass c => Turtle -> c -> Double -> Double -> IO ()
-put t c x y = do
-	goto t x y
-	pencolor t c
-	beginfill t
-	circle t 40
-	endfill t
-
-writeChar :: ColorClass c => Turtle -> c -> Double -> Double -> String -> IO ()
-writeChar t c x y s = do
-	goto t x y
-	pencolor t c
-	write t "Gothic" 50 s
