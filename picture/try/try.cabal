@@ -104,6 +104,13 @@ executable densha2
   build-depends:       base, try, xturtle, yjsvg
   default-language:    Haskell2010
 
+executable carsAndChildren
+  hs-source-dirs:      app
+  main-is:             carsAndChildren.hs
+  ghc-options:         -Wall -fno-warn-tabs -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base, try, xturtle, yjsvg
+  default-language:    Haskell2010
+
 test-suite try-test
   type:                exitcode-stdio-1.0
   hs-source-dirs:      test

@@ -1,5 +1,5 @@
 module Lib (
-	put, writeChar, densha, densha1, densha2, kuruma) where
+	put, writeChar, densha, densha1, densha2, kuruma, child) where
 
 import Control.Monad
 import Graphics.X11.Turtle
@@ -297,3 +297,35 @@ densha2 t x y = do
 		goto t (x + 30) (y + 5)
 		pendown t
 		replicateM_ 4 $ forward t 10 >> right t 90
+
+child :: ColorClass c => Turtle -> c -> Double -> Double -> IO ()
+child t c x y = do
+	penup t
+	setheading t 0
+	pencolor t c
+	goto t x y
+	forward t 10
+	pendown t
+	circle t 10
+	left t 180
+	circle t 10
+	penup t
+	goto t (x + 3) (y + 5)
+	pendown t
+	setheading t 135
+	forward t 11
+	penup t
+	goto t (x + 17) (y + 5)
+	pendown t
+	setheading t 45
+	forward t 11
+	penup t
+	goto t (x + 5) (y + 19)
+	setheading t (- 90)
+	pendown t
+	forward t 13
+	penup t
+	goto t (x + 15) (y + 19)
+	pendown t
+	forward t 13
+	penup t
