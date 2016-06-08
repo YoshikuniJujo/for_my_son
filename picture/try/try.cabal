@@ -17,7 +17,7 @@ library
   hs-source-dirs:      src
   exposed-modules:     Lib
   ghc-options:         -Wall -fno-warn-tabs
-  build-depends:       base >= 4.7 && < 5, xturtle
+  build-depends:       base >= 4.7 && < 5, xturtle, yjsvg
   default-language:    Haskell2010
 
 executable try
@@ -109,6 +109,13 @@ executable carsAndChildren
   main-is:             carsAndChildren.hs
   ghc-options:         -Wall -fno-warn-tabs -threaded -rtsopts -with-rtsopts=-N
   build-depends:       base, try, xturtle, yjsvg
+  default-language:    Haskell2010
+
+executable tomato
+  hs-source-dirs:      app
+  main-is:             tomato.hs
+  ghc-options:         -Wall -fno-warn-tabs -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base, try, xturtle
   default-language:    Haskell2010
 
 test-suite try-test

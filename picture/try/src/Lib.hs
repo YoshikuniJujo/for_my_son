@@ -1,11 +1,26 @@
 module Lib (
-	put, writeChar, densha, densha1, densha2, kuruma, child) where
+	run,
+	put, writeChar, densha, densha1, densha2, kuruma, child,
+	tomato) where
 
 import Control.Monad
 import Graphics.X11.Turtle
+import Text.XML.YJSVG hiding (topleft)
 
-someFunc :: IO ()
-someFunc = putStrLn "someFunc"
+run :: (Turtle -> IO a) -> IO a
+run act = do
+	f <- openField
+	onkeypress f $ return . (/= 'q')
+	topleft f
+	t <- newTurtle f
+	penup t
+	pensize t 2
+	goto t 100 100
+	r <- act t
+	svg <- getSVG t
+	putStr $ showSVG 830 1200 svg
+	waitField f
+	return r
 
 put :: ColorClass c => Turtle -> c -> Double -> Double -> IO ()
 put t c x y = do
@@ -328,4 +343,33 @@ child t c x y = do
 	goto t (x + 15) (y + 19)
 	pendown t
 	forward t 13
+	penup t
+
+tomato :: Turtle -> Double -> Double -> IO ()
+tomato t x y = do
+	goto t x y
+	pencolor t "red"
+	setheading t 180
+	beginfill t
+	circle t 30
+	endfill t
+	pencolor t "green"
+	goto t x (y - 3)
+	left t 10
+	beginfill t
+	forward t 10
+	left t 60
+	forward t 20
+	left t 160
+	forward t 20
+	right t 130
+	forward t 20
+	left t 160
+	forward t 20
+	right t 130
+	forward t 20
+	left t 160
+	forward t 20
+	endfill t
+	pencolor t "black"
 	penup t
