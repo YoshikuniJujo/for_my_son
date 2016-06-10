@@ -1,7 +1,7 @@
 module Lib (
 	run,
 	put, writeChar, densha, densha1, densha2, kuruma, child,
-	tomato, baby, mother, father) where
+	tomato, baby, mother, father, dango_bara, dango) where
 
 import Control.Monad
 import Graphics.X11.Turtle
@@ -450,3 +450,50 @@ mother t x y = do
 	base t x y
 	eyes t x y
 	hair t x y
+
+dango, dango_bara :: Turtle -> Double -> Double -> IO ()
+dango t x_ y = do
+	penup t
+	goto t x y
+	setheading t 180
+	pendown t
+	circle t 10
+	penup t
+	goto t x (y + 20)
+	pendown t
+	circle t 10
+	penup t
+	goto t x (y + 40)
+	pendown t
+	circle t 10
+	penup t
+	goto t x y
+	setheading t 90
+	pendown t
+	forward t 7
+	penup t
+	goto t x (y + 60)
+	setheading t (- 90)
+	pendown t
+	forward t 12
+	penup t
+	where
+	x = x_ + 10
+
+dango_bara t x_ y = do
+	penup t
+	goto t x y
+	setheading t 180
+	pendown t
+	circle t 10
+	penup t
+	goto t x (y + 25)
+	pendown t
+	circle t 10
+	penup t
+	goto t x (y + 50)
+	pendown t
+	circle t 10
+	penup t
+	where
+	x = x_ + 10
