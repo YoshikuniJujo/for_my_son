@@ -1,7 +1,7 @@
 module Lib (
 	run,
 	put, writeChar, densha, densha1, densha2, kuruma, child,
-	tomato, baby, mother, father, dango_bara, dango) where
+	tomato, baby, mother, father, dango_bara, dango, pomp) where
 
 import Control.Monad
 import Graphics.X11.Turtle
@@ -497,3 +497,45 @@ dango_bara t x_ y = do
 	penup t
 	where
 	x = x_ + 10
+
+pomp :: Turtle -> Double -> Double -> Double -> IO ()
+pomp t s x y = do
+	penup t
+	goto t x y
+	pencolor t "red"
+	beginfill t
+	replicateM_ 2 $
+		forward t (10 * s) >> right t 90 >> forward t (7 * s) >> right t 90
+	endfill t
+	goto t (x + 11 * s) (y - 1 * s)
+	beginfill t
+	forward t (3 * s) >> right t 60 >> forward t (6 * s) >> right t 30
+	forward t ((8 - 3 * sqrt 3) * s) >> right t 90 >> forward t (6 * s)
+	endfill t
+	forM_ [3, 14] $ \dx -> do
+		goto t (x + dx * s) (y + 9 * s)
+		pencolor t "black"
+		setheading t 0
+		beginfill t
+		circle t (1.5 * s)
+		endfill t
+	goto t (x + 5 * s) (y + 5.5 * s)
+	setheading t 180
+	pencolor t "white"
+	pensize t (5 * s / 10)
+	uzumaki t (0.12 * s)
+	setheading t 0
+	pensize t (3 * s / 10)
+	forM_ [7.5, 9] $ \dx -> do
+		goto t (x + dx * s) (y + 6 * s)
+		pendown t
+		circle t (4 * s / 10)
+		penup t
+
+uzumaki :: Turtle -> Double -> IO ()
+uzumaki t s = do
+	pendown t
+	forM_ [0, 0.1 * s .. 3.6 * 2 * s] $ \x -> do
+		forward t (3.6 * s - 0.4 * x)
+		right t 10
+	penup t
