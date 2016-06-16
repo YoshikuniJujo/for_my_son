@@ -1,7 +1,7 @@
 module Lib (
 	run,
 	put, writeChar, densha, densha1, densha2, kuruma, child,
-	tomato, baby, mother, father, dango_bara, dango, pomp) where
+	tomato, baby, mother, father, dango_bara, dango, pomp, hashigosha) where
 
 import Control.Monad
 import Graphics.X11.Turtle
@@ -500,6 +500,7 @@ dango_bara t x_ y = do
 
 pomp :: Turtle -> Double -> Double -> Double -> IO ()
 pomp t s x y = do
+	setheading t 0
 	penup t
 	goto t x y
 	pencolor t "red"
@@ -539,3 +540,43 @@ uzumaki t s = do
 		forward t (3.6 * s - 0.4 * x)
 		right t 10
 	penup t
+
+hashigosha :: Turtle -> Double -> Double -> IO ()
+hashigosha t x y = do
+	penup t
+	setheading t 0
+	goto t x y
+	pencolor t "red"
+	beginfill t
+--	pendown t
+	replicateM_ 2 $ forward t 40 >> right t 90 >> forward t 35 >> right t 90
+	endfill t
+--	penup t
+	goto t (x + 45) y
+	beginfill t
+--	pendown t
+--	forward t 25 >> right t 90 >> forward t 35 >> right t 90
+	forward t 10 >> right t 60 >> forward t 20 >> right t 30 >>
+		forward t (35 - 10 * sqrt 3) >> right t 90
+	forward t 20 >> right t 90 >> forward t 35 >> right t 90
+	endfill t
+--	penup t
+	forM_ [17, 46] $ \dx -> do
+		goto t (x + dx) (y + 45)
+		setheading t 0
+		pencolor t "black"
+		beginfill t
+		circle t 10
+		endfill t
+	forM_ [0 .. 8] $ \d -> do
+		goto t (x + 4 + 7.5 * d) (y + 4 - 2 * d)
+		setheading t 135
+		pendown t
+		forward t 9
+		penup t
+	forM_ [0 .. 1] $ \d -> do
+		goto t (x + 4 - d * 9 * sqrt 2 / 2) (y + 4 - d * 9 * sqrt 2 / 2)
+		pendown t
+		goto t	(x + 4 + 7.5 * 8 - d * 9 * sqrt 2 / 2)
+			(y + 4 - 2 * 8 - d * 9 * sqrt 2 / 2)
+		penup t
