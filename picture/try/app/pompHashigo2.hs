@@ -5,9 +5,9 @@ import Lib
 
 main :: IO ()
 main = run $ \t -> do
-	forM_ [0 .. 4] $ \x -> hashigosha t 1 (20 + 80 * x) 50
-	forM_ [5 .. 9] $ \x -> pomp t 4 (20 + 80 * x) 60
-	forM_ [0 .. 2] $ \x -> pomp t 4 (20 + 80 * x) 130
+	forM_ [0 .. 7] $ \x -> hashigosha t 1 (20 + 80 * x) 50
+	forM_ [8 .. 9] $ \x -> pomp t 4 (20 + 80 * x) 60
+	forM_ [0 .. 4] $ \x -> pomp t 4 (20 + 80 * x) 130
 	(\xs ys f -> zipWithM_ f xs ys) [0 ..] [
 		"はしごしゃはいくつ?",
 		"ぽんぷしゃはいくつ?",

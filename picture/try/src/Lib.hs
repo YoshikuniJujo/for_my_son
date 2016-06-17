@@ -541,42 +541,47 @@ uzumaki t s = do
 		right t 10
 	penup t
 
-hashigosha :: Turtle -> Double -> Double -> IO ()
-hashigosha t x y = do
+hashigosha :: Turtle -> Double -> Double -> Double -> IO ()
+hashigosha t s x y = do
 	penup t
 	setheading t 0
 	goto t x y
 	pencolor t "red"
 	beginfill t
 --	pendown t
-	replicateM_ 2 $ forward t 40 >> right t 90 >> forward t 35 >> right t 90
+	replicateM_ 2 $ do
+		forward t (40 * s) >> right t 90
+		forward t (35 * s) >> right t 90
 	endfill t
 --	penup t
-	goto t (x + 45) y
+	goto t (x + 45 * s) y
 	beginfill t
 --	pendown t
 --	forward t 25 >> right t 90 >> forward t 35 >> right t 90
-	forward t 10 >> right t 60 >> forward t 20 >> right t 30 >>
-		forward t (35 - 10 * sqrt 3) >> right t 90
-	forward t 20 >> right t 90 >> forward t 35 >> right t 90
+	forward t (10 * s) >> right t 60 >> forward t (20 * s) >> right t 30
+	forward t ((35 - 10 * sqrt 3) * s) >> right t 90
+	forward t (20 * s) >> right t 90 >> forward t (35 * s) >> right t 90
 	endfill t
 --	penup t
 	forM_ [17, 46] $ \dx -> do
-		goto t (x + dx) (y + 45)
+		goto t (x + dx * s) (y + 45 * s)
 		setheading t 0
 		pencolor t "black"
 		beginfill t
-		circle t 10
+		circle t (10 * s)
 		endfill t
+	pensize t (2 * s)
 	forM_ [0 .. 8] $ \d -> do
-		goto t (x + 4 + 7.5 * d) (y + 4 - 2 * d)
+		goto t (x + (4 + 7.5 * d) * s) (y + (4 - 2 * d) * s)
 		setheading t 135
 		pendown t
-		forward t 9
+		forward t (9 * s)
 		penup t
 	forM_ [0 .. 1] $ \d -> do
-		goto t (x + 4 - d * 9 * sqrt 2 / 2) (y + 4 - d * 9 * sqrt 2 / 2)
+		goto t	(x + (4 - d * 9 * sqrt 2 / 2) * s)
+			(y + (4 - d * 9 * sqrt 2 / 2) * s)
 		pendown t
-		goto t	(x + 4 + 7.5 * 8 - d * 9 * sqrt 2 / 2)
-			(y + 4 - 2 * 8 - d * 9 * sqrt 2 / 2)
+		goto t	(x + (4 + 7.5 * 8 - d * 9 * sqrt 2 / 2) * s)
+			(y + (4 - 2 * 8 - d * 9 * sqrt 2 / 2) * s)
 		penup t
+	pensize t 2
