@@ -36,63 +36,66 @@ writeChar t c x y s = do
 	pencolor t c
 	write t "Gothic" 30 s
 
-densha :: Turtle -> Double -> Double -> IO ()
-densha t x y = do
+densha :: Turtle -> Double -> Double -> Double -> IO ()
+densha t s x y = do
 	penup t
+	pensize t (2 * s)
 	setheading t 0
 	goto t x y
 	pendown t
 	replicateM_ 2 $ do
-		forward t 50
+		forward t (50 * s)
 		right t 90
-		forward t 30
+		forward t (30 * s)
 		right t 90
 	penup t
-	goto t (x + 10) y
+	goto t (x + 10 * s) y
 	pendown t
 	setheading t 45
 	replicateM_ 4 $ do
-		forward t 10
+		forward t (10 * s)
 		left t 90
 	penup t
-	goto t (x + 40) y
+	goto t (x + 40 * s) y
 	pendown t
 	setheading t 45
 	replicateM_ 4 $ do
-		forward t 10
+		forward t (10 * s)
 		left t 90
 	penup t
-	goto t (x + 20) (y + 30)
+	goto t (x + 20 * s) (y + 30 * s)
 	pendown t
 	setheading t (- 90)
 	replicateM_ 10 $ do
-		forward t 1.5
+		forward t (1.5 * s)
 		right t 20
 	setheading t (- 90)
 	replicateM_ 10 $ do
-		forward t 1.5
+		forward t (1.5 * s)
 		right t 20
 	penup t
-	goto t (x + 45) (y + 30)
+	goto t (x + 45 * s) (y + 30 * s)
 	pendown t
 	setheading t (- 90)
 	replicateM_ 10 $ do
-		forward t 1.5
+		forward t (1.5 * s)
 		right t 20
 	setheading t (- 90)
 	replicateM_ 10 $ do
-		forward t 1.5
+		forward t (1.5 * s)
 		right t 20
-	penup t
-	setheading t 0
-	goto t (x + 10) (y + 5)
-	pendown t
-	replicateM_ 4 $ forward t 10 >> right t 90
 	penup t
 	setheading t 0
-	goto t (x + 30) (y + 5)
+	goto t (x + 10 * s) (y + 5 * s)
 	pendown t
-	replicateM_ 4 $ forward t 10 >> right t 90
+	replicateM_ 4 $ forward t (10 * s) >> right t 90
+	penup t
+	setheading t 0
+	goto t (x + 30 * s) (y + 5 * s)
+	pendown t
+	replicateM_ 4 $ forward t (10 * s) >> right t 90
+	penup t
+	pensize t 2
 
 kuruma :: ColorClass c => Turtle -> c -> Double -> Double -> IO ()
 kuruma t c x y = do

@@ -7,9 +7,9 @@ main :: IO ()
 main = run $ \t -> do
 	pencolor t "blue"
 	forM_ [0 .. 2] $ \y ->
-		forM_ [0 .. 9] $ \x -> densha t (50 + x * 80) (50 + y * 80)
+		forM_ [0 .. 9] $ \x -> densha t 1 (50 + x * 80) (50 + y * 80)
 	pencolor t "red"
-	forM_ [0 .. 6] $ \x -> densha t (50 + x * 80) (50 + 3 * 80)
+	forM_ [0 .. 6] $ \x -> densha t 1 (50 + x * 80) (50 + 3 * 80)
 	penup t
 	(\xs ys f -> zipWithM_ f xs ys) [0 ..] [
 		("blue", "あおいでんしゃはいくつ?"),

@@ -11,7 +11,7 @@ main = run $ \t -> do
 		(5, 10, "yellow")] $ \y (dns, cld, clr) -> do
 		pencolor t clr
 		forM_ [0 .. dns - 1] $ \x ->
-			densha t (100 + x * 80) (70 + y * 370)
+			densha t 1 (100 + x * 80) (70 + y * 370)
 		forM_ [0 .. cld - 1] $ \x ->
 			child t clr (100 + x * 40) (140 + y * 370)
 	pencolor t "black"
