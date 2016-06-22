@@ -216,6 +216,20 @@ executable countMany
   build-depends:       base, try, xturtle
   default-language:    Haskell2010
 
+executable kanji2
+  hs-source-dirs:      app
+  main-is:             kanji2.hs
+  ghc-options:         -Wall -fno-warn-tabs -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base, try, xturtle
+  default-language:    Haskell2010
+
+executable shiki
+  hs-source-dirs:      app
+  main-is:             shiki.hs
+  ghc-options:         -Wall -fno-warn-tabs -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base, try, xturtle
+  default-language:    Haskell2010
+
 test-suite try-test
   type:                exitcode-stdio-1.0
   hs-source-dirs:      test
